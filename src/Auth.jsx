@@ -23,10 +23,8 @@ export default function Auth() {
     // }
 
     const { error } = await supabase.auth.signInWithOtp({
-     email : email,
-     options: {
-      emailRedirectTo: 'https://auth-supabase-reactjs.vercel.app'
-    }
+     email ,
+     options: { emailRedirectTo:  "https://auth-supabase-reactjs.vercel.app/" } 
     })
 
     if (error) {
