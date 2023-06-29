@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
 
@@ -9,7 +10,24 @@ export default function Auth() {
     event.preventDefault()
 
     setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({ email })
+
+    // const getURL = () => {
+    //   let url =
+    //     `https://auth-supabase-reactjs.vercel.app/`
+    //     'http://localhost:5173/'
+    //   // Make sure to include `https://` when not localhost.
+    //   url = url.includes('http') ? url : `https://${url}`
+    //   // Make sure to include a trailing `/`.
+    //   url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
+    //   return url
+    // }
+
+    const { error } = await supabase.auth.signInWithOtp({
+     email : email,
+     options: {
+      emailRedirectTo: 'https://auth-supabase-reactjs.vercel.app'
+    }
+    })
 
     if (error) {
       alert(error.error_description || error.message)
